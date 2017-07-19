@@ -354,8 +354,8 @@ levelManager = {
   fishAmount : 999,
   currentLevel : 0,
   rodsAmount : 3,
-  requiredPointsStart : 400,
-  requiredPoints : 400,
+  requiredPointsStart : 500,
+  requiredPoints : 500,
   fishCooldown : [1750,1500,1150],
   currentCooldown :0,
 
@@ -402,8 +402,8 @@ levelManager = {
     {
       this.rodsAmount = 1;
       this.currentCooldown = 0;
-      this.timeForLevel = 12;
-      this.requiredPoints = 0;
+      this.timeForLevel = 120;
+      this.requiredPoints = 500;
       /*this.timeForLevel = 120;
       this.requiredPoints = 0;*/
     }

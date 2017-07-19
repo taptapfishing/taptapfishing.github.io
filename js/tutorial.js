@@ -208,8 +208,8 @@ tipsManager.screen_3[1] = game.add.sprite(200,300,'decoFishOld');
 tipsManager.nickRender = game.add.text(200, 300,tipsManager.nickName,{ font: '32px Frijole', fill: '#FFF', align: 'center', wordWrapWidth: 400 });
 for(var i = 0; i< 4; i++)
 {
-	tipsManager.nickButtons[i] = game.add.button(200,400, 'letterB');
-	tipsManager.nickButtons[i].scale.setTo(0.2,0.2);
+	tipsManager.nickButtons[i] = game.add.button(200,350, 'letterB');
+	tipsManager.nickButtons[i].scale.setTo(0.3,0.3);
 }
 
 tipsManager.nickButtons[1].onInputDown.add(function(){tipsManager.changePosition(true);},this);
@@ -220,7 +220,7 @@ tipsManager.nickButtons[3].onInputDown.add(function(){tipsManager.changeLetter(t
 
 
 tipsManager.nickButtons[2].x = 200 - tipsManager.nickButtons[1].width/2 ;
-tipsManager.nickButtons[2].y = 400;
+tipsManager.nickButtons[2].y = 350;
 tipsManager.nickButtons[3].x = tipsManager.nickButtons[2].x ;
 tipsManager.nickButtons[3].y = tipsManager.nickButtons[2].y+tipsManager.nickButtons[2].height;
 
