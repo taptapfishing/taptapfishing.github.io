@@ -140,6 +140,7 @@ fishingGame.MainMenu.prototype = {
 		if(!game.state.states['VStore'].loadOnce)
 		{
 			game.state.states['VStore'].music = this.add.audio('titleMusic');
+			game.state.states['VStore'].pop = this.add.audio('pop');
 			game.state.states['VStore'].loadOnce = true;
 		}
 		game.state.states['VStore'].is_Muted = false;

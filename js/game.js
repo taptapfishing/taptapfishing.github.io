@@ -354,8 +354,8 @@ levelManager = {
   fishAmount : 999,
   currentLevel : 0,
   rodsAmount : 3,
-  requiredPointsStart : 500,
-  requiredPoints : 500,
+  requiredPointsStart : 400,
+  requiredPoints : 400,
   fishCooldown : [1750,1500,1150],
   currentCooldown :0,
 
@@ -432,13 +432,14 @@ levelManager = {
   nextLevel : function()
   {
     fishingRods.gameOver = false;
-    gameInfo.addPoints(-gameInfo.pointsValue);
+
     game.time.removeAll();
     this.levelElapsed = 0;
     //this.timeCounter.removeAll();
     //this.timeCounter.stop(false);
     if(this.currentLevel < 9)this.currentLevel++;
     this.prepareLevel();
+    gameInfo.addPoints(-gameInfo.pointsValue);
     spawners.tidyUp();
     fishingRods.init(this.rodsAmount);
 
@@ -847,6 +848,7 @@ fishingGame.Game.prototype = {
                 if(spawners.fishes[i].danger)
                 {
                   //console.log("game over");
+
                   commentManager.addComment(true,spawners.fishes[i].lootPTS,spawners.fishes[i].render.x,spawners.fishes[i].render.y);
                   gameInfo.addPoints(spawners.fishes[i].lootPTS);
                   fishingRods.baits[k].alive = false;
@@ -865,12 +867,15 @@ fishingGame.Game.prototype = {
                   }
                 }
                 else {
+                  //game.state.states['VStore'].pop.volume = game.state.states['VStore'].soundVolume;
+                  if(!game.state.states['VStore'].is_Muted) game.state.states['VStore'].pop.play();
+
                   commentManager.addComment(true,spawners.fishes[i].lootPTS,spawners.fishes[i].render.x,spawners.fishes[i].render.y);
                   gameInfo.addPoints(spawners.fishes[i].lootPTS);
                   spawners.killFish(false,i);
-
                   break;
                 }
+
               }
             }
             }

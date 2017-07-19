@@ -13,6 +13,7 @@ fishingGame.variableStore = function (game) {
   muteFrame = 0;
   is_Muted = false;
   music = 0;
+  pop = 0;
 
 }
 fishingGame.variableStore.prototype = {
