@@ -42,8 +42,8 @@ fishingGame.Preloader.prototype = {
 		this.load.image('gamebg','assets/gamebg.png');
 		this.load.image('fishingRod','assets/fishingRod.png');
 
-		this.load.spritesheet('tutorial1','assets/tutorial/htp.png',400,600);
-		this.load.spritesheet('tutorial2','assets/tutorial/htp2.png',120,45);
+		this.load.spritesheet('tutorial1','assets/gui/htp.png',400,600);
+		this.load.spritesheet('tutorial2','assets/gui/htp2.png',120,45);
 
 		this.load.spritesheet('play','assets/gui/button.png',288,130);
 		this.load.spritesheet('soundMute','assets/gui/sound.png',358/2,190);
