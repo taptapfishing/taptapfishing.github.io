@@ -61,7 +61,7 @@ fishingGame.levelSummary = function (game) {
               });
 
               game.time.events.add(1500,function(){
-                scoreBoardService.getTopNRankers("taptapfishing1", 3,{
+                scoreBoardService.getTopNRankers(apiLevelName, 3,{
                   success: function(object)
                   {
                    var scorelist = "";
