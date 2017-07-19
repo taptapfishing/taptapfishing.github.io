@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<title>Tap-Tap Fishing</title>
+	<script type="text/javascript" src="js/App42-all-3.0.min.js"></script>
+
+	<script src="js/phaser.min.js"></script>
+	<script src="js/boot.js"></script>
+	<script src="js/preloader.js"></script>
+	<script src="js/menu.js"></script>
+	<script src="js/gameBreak.js"></script>
+	<script src="js/variableStore.js"></script>
+	<script src="js/levelSummary.js"></script>
+	<script src="js/tutorial.js"></script>
+	<script src="js/game.js"></script>
+</head>
+<body>
+
+<div id="gameContainer"></div>
+
+<script type="text/javascript">
+//syf
+App42.initialize("0cc1db50b457b286d1bded348970890dbe0e8148c4b81d318a73a03b5293b35e","77a5adac8ab0220dbe884a32bcd33689fc5eba83b5c1331a25fe90d76ff2753c");
+function replaceAt(str,index,newLetter) {
+
+    str = setCharAt(str,index,newLetter);
+    return str;
+}
+
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
+
+
+const SAFE_ZONE_WIDTH=400;const SAFE_ZONE_HEIGHT=600;
+	var w = window.innerWidth ;//* pixelRatio,
+		h = window.innerHeight ;//* pixelRatio;
+	var lw, lh; //landscape width/height in pixels
+	if ( h > w ) {
+	lw = h;
+	lh = w;
+	} else {
+	lw = w;
+	lh = h;
+	}
+	var aspectRatioDevice = lw/lh;
+
+	var aspectRatioSafeZone = SAFE_ZONE_WIDTH / SAFE_ZONE_HEIGHT;
+	var extraWidth = 0, extraHeight = 0;
+	if (aspectRatioSafeZone < aspectRatioDevice) {
+	// have to add game pixels vertically in order to fill the device screen
+	extraWidth = aspectRatioDevice * SAFE_ZONE_HEIGHT - SAFE_ZONE_WIDTH;
+	} else {
+	// have to add game pixels horizontally
+	extraHeight = SAFE_ZONE_WIDTH / aspectRatioDevice - SAFE_ZONE_HEIGHT;
+	}
+
+	//var game = new Phaser.Game( (h > w) ? h : w, (h > w) ? w : h, Phaser.CANVAS, 'game_div');
+	//var game = new Phaser.Game( SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT, Phaser.AUTO, 'game_div');
+	var game = new Phaser.Game( SAFE_ZONE_WIDTH , SAFE_ZONE_HEIGHT , Phaser.CANVAS, '');
+
+//koniec bałaganu
+
+
+//var game = new Phaser.Game(400, 600, Phaser.AUTO, 'gameContainer');
+window.onload = function() {
+	//	Create your Phaser game and inject it into the gameContainer div.
+	//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
+
+	//	Add the States your game has.
+	//	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
+	game.state.add('Boot', fishingGame.Boot);
+	game.state.add('Preloader', fishingGame.Preloader);
+	game.state.add('MainMenu', fishingGame.MainMenu);
+	game.state.add('Break', fishingGame.gameBreak);
+	game.state.add('Summary', fishingGame.levelSummary);
+	game.state.add('tutorial', fishingGame.tutorial);
+	game.state.add('VStore', fishingGame.variableStore);
+	game.state.add('Game', fishingGame.Game);
+	//	Now start the Boot state.
+	game.state.start('Boot');
+};
+window.addEventListener('resize', function(event){    resizeGame();});var resizeGame = function () {    game.scale.setShowAll();    game.scale.refresh();}
+</script>
+
+</body>
+</html>
