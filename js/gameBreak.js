@@ -22,7 +22,7 @@ fishingGame.gameBreak.prototype = {
     {
       apiLevelName += '3';
     }
-		
+
 
     if(game.state.states['Game']._gameMode == 1)
     {
@@ -63,7 +63,8 @@ skipLabel.x -= skipLabel.width/2;
 skipLabel.y -= skipLabel.height/2;
 
 game.state.states['VStore'].soundVolume = 0;
-game.state.states['VStore'].music.fadeOut(1000);
+//game.state.states['VStore'].music.fadeOut(1000);
+game.state.states['VStore'].hsound.fade(1.0,0.0,1000);
 
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button

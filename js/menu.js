@@ -131,21 +131,40 @@ fishingGame.MainMenu = function (game) {
 }
 fishingGame.MainMenu.prototype = {
 
-	create: function () {
+		create: function () {
 
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
 
-		if(!game.state.states['VStore'].loadOnce)
-		{
-			game.state.states['VStore'].music = this.add.audio('titleMusic');
-			game.state.states['VStore'].pop = this.add.audio('pop');
-			game.state.states['VStore'].loadOnce = true;
-		}
+
+		    if(!game.state.states['VStore'].loadOnce)
+				{
+		      game.state.states['VStore'].hsound=    new Howl({
+		     src: ['assets/sfx/loop.ogg'],
+		     autoplay: false,
+		     loop: true,
+		     volume: game.state.states['VStore'].soundVolume,
+		     onend: function() {
+		       console.log('Finished!');
+		     }
+
+		   });
+		   game.state.states['VStore'].hpop=    new Howl({
+		  src: ['assets/sfx/pop.ogg'],
+		  autoplay: false,
+		  loop: false,
+		  volume: game.state.states['VStore'].soundVolume,
+		  onend: function() {
+		    console.log('Finished!');
+		  }
+		});
+	}
+
+		//tubyło
 		game.state.states['VStore'].is_Muted = false;
 
-		soundManager.music = this.add.audio('titleMusic');
+		//soundManager.music = this.add.audio('titleMusic');
 
 
 		this.bgLayers[0] = this.add.sprite(0, 0, 'titlepage');
@@ -237,11 +256,11 @@ fishingGame.MainMenu.prototype = {
 
 
 		//soundManager.music.play();
-		if(!game.state.states['VStore'].is_Muted)
+		/*if(!game.state.states['VStore'].is_Muted && game.device.desktop)
 		{
 			game.state.states['VStore'].music.play('',0,soundManager.globalVolume,true);
 			game.state.states['VStore'].music.onLoop.add(function(){game.state.states['VStore'].music.play('', 0, soundManager.globalVolume, true); }, this);
-		}
+		}*/
 
 		//soundManager.music.play('', 0, soundManager.globalVolume, true);
 		//soundManager.music.onLoop.add(function(){soundManager.music.play('', 0, soundManager.globalVolume, true); }, this);
@@ -265,6 +284,12 @@ fishingGame.MainMenu.prototype = {
 					}
 				}
 			}*/
+			if(game.state.states['VStore'].hsound.state() == 'loaded' && !game.state.states['VStore'].loadOnce)
+	    {
+	      game.state.states['VStore'].loadOnce = true;
+	      console.log(game.state.states['VStore'].hsound.state());
+					game.state.states['VStore'].hsound.play(); 
+	    }
 
 		this.decorationFishes.update();
 

@@ -145,27 +145,38 @@ fishingGame.Game = function (game) {
 
     				if(!this.isMuted)
     				{
-              game.state.states['VStore'].soundVolume = 0;
+              //game.state.states['VStore'].soundVolume = 0;
               game.state.states['VStore'].is_Muted = true;
     					this.globalVolume= game.state.states['VStore'].soundVolume;
 
-    					game.state.states['VStore'].music.volume = this.globalVolume;
+    					//game.state.states['VStore'].music.volume = this.globalVolume;
               game.state.states['VStore'].muteFrame = 1;
     					gameInfo.muteButton.frame = game.state.states['VStore'].muteFrame;
+              game.state.states['VStore'].hsound.mute(true);
+              game.state.states['VStore'].hsound.volume(0);
+
+              game.state.states['VStore'].hpop.mute(true);
+              game.state.states['VStore'].hpop.volume(0);
     					//game.state.states['Game'].muteButton.frame = 1;
     				}
     				else
     				{
     					this.globalVolume=1;
-              game.state.states['VStore'].soundVolume = 1;
+            //  game.state.states['VStore'].soundVolume = 1;
               game.state.states['VStore'].is_Muted = false;
-    					this.music.volume = game.state.states['VStore'].soundVolume;
-              game.state.states['VStore'].music.volume = this.globalVolume;
+    					//this.music.volume = game.state.states['VStore'].soundVolume;
+              //game.state.states['VStore'].music.volume = this.globalVolume;
               game.state.states['VStore'].muteFrame = 0;
     					gameInfo.muteButton.frame = game.state.states['VStore'].muteFrame;
+              game.state.states['VStore'].hsound.mute(false);
+              game.state.states['VStore'].hsound.volume(1);
+
+              game.state.states['VStore'].hpop.mute(false);
+              game.state.states['VStore'].hpop.volume(1);
     					//game.state.states['Game'].muteButton.frame = 0;
     					}
               //console.log(game.state.states['VStore'].is_Muted);
+
     				this.isMuted = !this.isMuted;
           /*  game.state.states['VStore'].muteCanClick = false;
               game.time.events.add(1000, function(){game.state.states['VStore'].muteCanClick = true;
@@ -798,14 +809,7 @@ fishingGame.Game.prototype = {
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
         //tutaj pakujemy rybki i wędkowanie oraz tory
         //if(game.state.states['VStore'].soundVolume == 0)game.state.states['VStore'].soundVolume = 1;
-        if(!game.state.states['VStore'].loadOnce)
-        {
-        //  soundManager.music = this.add.audio('titleMusic');
-      //    soundManager.music.stop();
-      //		if(!soundManager.music.isPlaying) soundManager.music.play('', 0, game.state.states['VStore'].soundVolume, true);
-      //		soundManager.music.onLoop.add(function(){soundManager.music.play('', 0, game.state.states['VStore'].soundVolume, true); }, this);
-      //    game.state.states['VStore'].loadOnce = true;
-        }
+
         gameBackground = this.game.add.sprite(0,0,'gamebg');
         gameBackground.frame = 0;
         gameInfo.init();
@@ -813,7 +817,12 @@ fishingGame.Game.prototype = {
       spawners.initLanes();
       levelManager.nextLevel();
 
-      if(!game.state.states['VStore'].is_Muted)game.state.states['VStore'].music.fadeIn(1000,true);
+      if(!game.state.states['VStore'].is_Muted)
+      {
+        //game.state.states['VStore'].music.fadeIn(1000,true);
+        game.state.states['VStore'].hsound.fade(0.0,1.0,1500);
+        //game.state.states['VStore'].hsound.mute(game.state.states['VStore'].is_Muted);
+      }
   		//soundManager.music.play();
 
       //this.bubbleManager.init();
@@ -868,7 +877,10 @@ fishingGame.Game.prototype = {
                 }
                 else {
                   //game.state.states['VStore'].pop.volume = game.state.states['VStore'].soundVolume;
-                  if(!game.state.states['VStore'].is_Muted) game.state.states['VStore'].pop.play();
+                  if(!game.state.states['VStore'].is_Muted)
+                  {
+                    game.state.states['VStore'].hpop.play();
+                  }
 
                   commentManager.addComment(true,spawners.fishes[i].lootPTS,spawners.fishes[i].render.x,spawners.fishes[i].render.y);
                   gameInfo.addPoints(spawners.fishes[i].lootPTS);
@@ -908,22 +920,9 @@ fishingGame.Game.prototype = {
               }
             }
           }
-
-
     },
-
-
-
     quitGame: function (pointer) {
-
-        //  Here you should destroy anything you no longer need.
-        //  Stop music, delete sprites, purge caches, free resources, all that good stuff.
-
-        //  Then let's go back to the main menu.
         this.state.start('MainMenu');
 
     },
-
-
-
 };

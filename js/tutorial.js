@@ -11,7 +11,7 @@ fishingGame.tutorial = function (game) {
     x : 48,
     y : 48,
     locked : false,
-    lockedCooldown : 1000,
+    lockedCooldown : 3000,
     tipRenderTxt : 0,
     screen_1_2 : 0,
     screen_3 : [0,0],
@@ -111,7 +111,7 @@ fishingGame.tutorial = function (game) {
           this.tipRenderTxt.text = tips[this.currentTip];
           this.tipRenderTxt.x = 200 - this.tipRenderTxt.width/2;
           this.locked = true;
-          game.time.events.add(this.lockedCooldown, function(){this.locked = false;    }, this);
+          game.time.events.add(this.lockedCooldown, function(){this.locked = false;  skipButton.visible=true;skipLabel.visible=true;  }, this);
 					if(this.currentTip == 5)
 					{
 						for(var i = 0; i< 4; i++)
@@ -164,17 +164,19 @@ fishingGame.tutorial = function (game) {
           }
 					else if(this.currentTip == 4)
 					{
-						this.changePosition(false);
-						for(var i = 0; i< 4; i++)
-						{
-							this.nickButtons[i].visible = true;
-							this.nickButtons[i].frame = i;
-						}
+						game.time.events.add(1000, function(){
+							this.changePosition(false);
+							for(var i = 0; i< 4; i++)
+							{
+								this.nickButtons[i].visible = true;
+								this.nickButtons[i].frame = i;
+							}
 
-						this.screen_1_2.visible = false;
-						this.nickRender.visible = true;
-						this.nickRender.x = 200- this.nickRender.width/2;
-						this.nickRender.y = 300- this.nickRender.height/2;
+							this.screen_1_2.visible = false;
+							this.nickRender.visible = true;
+							this.nickRender.x = 200- this.nickRender.width/2;
+							this.nickRender.y = 300- this.nickRender.height/2;
+						},this);
 					}
 
         }
@@ -234,7 +236,7 @@ tipsManager.nextTip();
 
 
 
-skipButton = game.add.button(320, 540, 'play',function(){tipsManager.nextTip();}, this, 1, 0, 0);
+skipButton = game.add.button(320, 540, 'play',function(){tipsManager.nextTip();skipButton.visible=false;skipLabel.visible=false;}, this, 1, 0, 0);
 skipButton.scale.setTo(0.5,0.5);
 
 skipButton.x -= skipButton.width/2;

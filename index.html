@@ -43,11 +43,14 @@
 </style>
 
 	<title>Tap-Tap Fishing</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/App42-all-3.0.min.js"></script>
 
 	<script src="js/phaser.min.js"></script>
 	<script src="js/boot.js"></script>
 	<script src="js/preloader.js"></script>
+	<script src="js/fixMusic.js"></script>
 	<script src="js/menu.js"></script>
 	<script src="js/gameBreak.js"></script>
 	<script src="js/variableStore.js"></script>
@@ -59,7 +62,7 @@
 <body>
 
 <div id="container"></div>
-<script src='js/fullscreen.js'></script>
+<!-- <script src='js/fullscreen.js'></script> -->
 <script type="text/javascript">
 //syf
 App42.initialize("0cc1db50b457b286d1bded348970890dbe0e8148c4b81d318a73a03b5293b35e","77a5adac8ab0220dbe884a32bcd33689fc5eba83b5c1331a25fe90d76ff2753c");
@@ -115,6 +118,7 @@ window.onload = function() {
 	game.state.add('Boot', fishingGame.Boot);
 	game.state.add('Preloader', fishingGame.Preloader);
 	game.state.add('MainMenu', fishingGame.MainMenu);
+	game.state.add('fixMusic', fishingGame.fixMusic);
 	game.state.add('Break', fishingGame.gameBreak);
 	game.state.add('Summary', fishingGame.levelSummary);
 	game.state.add('tutorial', fishingGame.tutorial);
@@ -128,6 +132,16 @@ window.onload = function() {
 	game.scale.refresh();
 };
 window.addEventListener('resize', function(event){    resizeGame();});var resizeGame = function () {    game.scale.setShowAll();    game.scale.refresh();}
+
+$(window).focus(function() {
+   
+	 if(game.state.states['VStore'].loadOnce) game.state.states['VStore'].hsound.mute(false);
+});
+
+$(window).blur(function() {
+	if(game.state.states['VStore'].loadOnce)game.state.states['VStore'].hsound.mute(true);
+
+});
 </script>
 
 </body>
