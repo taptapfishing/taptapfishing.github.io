@@ -252,6 +252,21 @@ fishingGame.MainMenu.prototype = {
 	update: function () {
 
 		//	Do some nice funky main menu effect here
+		  if(this.game.input.activePointer.isDown)
+			{
+				if(this.game.device != this.game.desktop)
+				{
+					if (this.game.scale.isFullScreen)
+					{
+							this.game.scale.stopFullScreen();
+					}
+					else
+					{
+							this.game.scale.startFullScreen(false);
+					}
+				}
+			}
+
 		this.decorationFishes.update();
 
 	},

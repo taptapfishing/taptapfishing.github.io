@@ -69,6 +69,7 @@ fishingGame.Boot.prototype = {
               this.scale.minHeight = 480;
               this.scale.maxWidth = 400;
               this.scale.maxHeight = 600;
+
               this.game.scale.refresh();
               this.game.canvas.id = 'canvas';
         }
