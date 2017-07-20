@@ -875,7 +875,6 @@ fishingGame.Game.prototype = {
                   spawners.killFish(false,i);
                   break;
                 }
-
               }
             }
             }

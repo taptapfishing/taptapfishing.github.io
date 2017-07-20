@@ -3,6 +3,44 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<STYLE>
+	body {
+			margin: 0 auto;
+			padding: 0;
+			text-align: center;
+			width: 100%;
+
+	}
+	#container {
+			margin: 0 auto;
+			padding: 0;
+			height: 100vh;
+	}
+
+	#canvas {
+			display: block;
+			padding: 0;
+			margin: 0 auto;
+			width: 100%;
+			/*background-color:red;*/
+	}
+	@media screen and (max-width:400px), screen and (max-height:480px) {
+			#container {
+					margin: 0 auto;
+					height: 100vh;
+			}
+			#canvas {
+				display: block;
+				padding: 0;
+				margin: 0 auto;
+					width: 100%;
+					height: 100vh;
+
+			}
+	}
+
+</style>
+
 	<title>Tap-Tap Fishing</title>
 	<script type="text/javascript" src="js/App42-all-3.0.min.js"></script>
 
@@ -18,7 +56,7 @@
 </head>
 <body>
 
-<div id="gameContainer"></div>
+<div id="container"></div>
 
 <script type="text/javascript">
 //syf
@@ -60,7 +98,7 @@ const SAFE_ZONE_WIDTH=400;const SAFE_ZONE_HEIGHT=600;
 
 	//var game = new Phaser.Game( (h > w) ? h : w, (h > w) ? w : h, Phaser.CANVAS, 'game_div');
 	//var game = new Phaser.Game( SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT, Phaser.AUTO, 'game_div');
-	var game = new Phaser.Game( SAFE_ZONE_WIDTH , SAFE_ZONE_HEIGHT , Phaser.CANVAS, '');
+	var game = new Phaser.Game( SAFE_ZONE_WIDTH , SAFE_ZONE_HEIGHT , Phaser.CANVAS, 'container');
 
 //koniec bałaganu
 
@@ -82,6 +120,10 @@ window.onload = function() {
 	game.state.add('Game', fishingGame.Game);
 	//	Now start the Boot state.
 	game.state.start('Boot');
+
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVeritcally = true;
+	game.scale.refresh();
 };
 window.addEventListener('resize', function(event){    resizeGame();});var resizeGame = function () {    game.scale.setShowAll();    game.scale.refresh();}
 </script>

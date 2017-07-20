@@ -59,16 +59,18 @@ fishingGame.Boot.prototype = {
 
             //  this.game.stage.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
             //  this.game.scale.setShowAll();
-              this.game.scale.pageAlignHorizontally = true;
-              this.game.scale.pageAlignVeritcally = true;
+              this.game.scale.pageAlignHorizontally = false;
+              this.game.scale.pageAlignVeritcally = false;
             //  this.game.scale.refresh();
 
               this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
               this.scale.minWidth = 320;
-              this.scale.minHeight = 568;
+              //this.scale.minHeight = 568;
+              this.scale.minHeight = 480;
               this.scale.maxWidth = 400;
               this.scale.maxHeight = 600;
               this.game.scale.refresh();
+              this.game.canvas.id = 'canvas';
         }
 
     },
