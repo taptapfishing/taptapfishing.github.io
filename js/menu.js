@@ -214,6 +214,8 @@ fishingGame.MainMenu.prototype = {
 		soundManager.muteSound.frame = game.state.states['VStore'].muteFrame;
 		soundManager.muteSound.onInputDown.add(function(){
 
+			game.scale.startFullScreen();
+
 				if(game.state.states['VStore'].muteCanClick)
 				{
 					game.state.states['VStore'].muteCanClick = false;
