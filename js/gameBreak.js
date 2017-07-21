@@ -7,12 +7,12 @@ fishingGame.gameBreak = function (game) {
 	breakManager ={
 		beginB : function()
 		{
-			console.log('start break');
+			
 		},
 		endB : function(data)
 		{
 			if (data && data.completed) {
-			 console.log('nagroda?');
+
 	 	}
 			game.time.events.add(1000,function(){game.state.start('Game');},this);
 		}
