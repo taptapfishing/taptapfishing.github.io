@@ -136,35 +136,15 @@ fishingGame.MainMenu.prototype = {
 
 		create: function () {
 
-if(!game.state.states['VStore'].loadOnce)
-				{
-					game.time.events.add(2000,function(){
-						game.load.image('brand',game.state.states['VStore'].logoLink);
-						game.load.start();
-						//console.log(game.state.states['VStore'].logoLink);
-					},this);
-					game.state.states['VStore'].overallRank = 0;
-					//console.log(game.state.states['VStore'].overallRank);
-		      game.state.states['VStore'].hsound=    new Howl({
-		     src: ['assets/sfx/loop1.ogg','assets/sfx/loop1.aac','assets/sfx/loop1.mp3'],
-		     autoplay: true,
-		     loop: true,
-		     volume: game.state.states['VStore'].soundVolume,
-		     onend: function() {
-		       //console.log('Finished!');
-		     }
-
-		   });
-		   game.state.states['VStore'].hpop=    new Howl({
-		  src: ['assets/sfx/pop.ogg','assets/sfx/pop.mp3'],
-		  autoplay: false,
-		  loop: false,
-		  volume: game.state.states['VStore'].soundVolume,
-		  onend: function() {
-		   // console.log('Finished!');
-		  }
-		});
-	}
+			if(!game.state.states['VStore'].loadOnce)
+							{
+						game.time.events.add(2000,function(){
+							game.load.image('brand',game.state.states['VStore'].logoLink);
+							game.load.start();
+							//console.log(game.state.states['VStore'].logoLink);
+						},this);
+						game.state.states['VStore'].loadOnce = true;
+					}
 
 		//tubyło
 		game.state.states['VStore'].is_Muted = false;
