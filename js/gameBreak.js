@@ -4,6 +4,20 @@ fishingGame.gameBreak = function (game) {
 	skipLabel = null;
 	background = null;
 
+	breakManager ={
+		beginB : function()
+		{
+			console.log('start break');
+		},
+		endB : function(data)
+		{
+			if (data && data.completed) {
+			 console.log('nagroda?');
+	 	}
+			game.time.events.add(1000,function(){game.state.start('Game');},this);
+		}
+	};
+
 }
 fishingGame.gameBreak.prototype = {
 
@@ -39,6 +53,8 @@ fishingGame.gameBreak.prototype = {
               if (scoreList instanceof Array) {
                 //  scoreBoard.textResult += ('.'+this.top3[i].userName+' - ' + this.top3[i].value.toString());
                   game.state.states['VStore'].minimalScoreChallenge = scoreList[scoreList.length-1].value;
+
+									//tu bym sie zastanowił nad zmianą score list length-1 na [3]
 									game.state.states['VStore'].bestLevelScore = scoreList[0].value;
                   //console.log(game.state.states['VStore'].minimalScoreChallenge);
                   }
@@ -61,16 +77,21 @@ skipLabel = game.add.text(skipButton.x + skipButton.width/2, skipButton.y+skipBu
 skipLabel.scale.setTo(0.5,0.5);
 skipLabel.x -= skipLabel.width/2;
 skipLabel.y -= skipLabel.height/2;
-
+skipLabel.visible = false;
+skipButton.visible = false;
 game.state.states['VStore'].soundVolume = 0;
 //game.state.states['VStore'].music.fadeOut(1000);
-game.state.states['VStore'].hsound.fade(1.0,0.0,1000);
+ if(!game.state.states['VStore'].is_Muted)
+ {
+	 	game.state.states['VStore'].hsound.fade(1.0,0.0,1000);
+ }
 
+//game.time.events.add(3000,function(){game.state.start('Game');},this);
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
 
-
+GameAPI.GameBreak.request(breakManager.beginB, breakManager.endB);
 	},
 
 	update: function () {

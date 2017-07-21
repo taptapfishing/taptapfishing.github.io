@@ -3,10 +3,13 @@ fishingGame.MainMenu = function (game) {
 
 
 	this.playButtons = [null,null];
+	this.moreGames = null;
+	this.moreLabel = null;
 	this.labels = [null,null];
 	this.bgLayers = [null,null];
 	this.logo = null;
 	this.logoLabel = null;
+	this.spilLogo = null;
 
 	soundManager = {
 			music : null,
@@ -133,20 +136,22 @@ fishingGame.MainMenu.prototype = {
 
 		create: function () {
 
-		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
-		//	Here all we're doing is playing some music and adding a picture and button
-		//	Naturally I expect you to do something significantly better :)
-
-
-		    if(!game.state.states['VStore'].loadOnce)
+if(!game.state.states['VStore'].loadOnce)
 				{
+					game.time.events.add(2000,function(){
+						game.load.image('brand',game.state.states['VStore'].logoLink);
+						game.load.start();
+						//console.log(game.state.states['VStore'].logoLink);
+					},this);
+					game.state.states['VStore'].overallRank = 0;
+					//console.log(game.state.states['VStore'].overallRank);
 		      game.state.states['VStore'].hsound=    new Howl({
-		     src: ['assets/sfx/loop.ogg'],
-		     autoplay: false,
+		     src: ['assets/sfx/loop1.ogg'],
+		     autoplay: true,
 		     loop: true,
 		     volume: game.state.states['VStore'].soundVolume,
 		     onend: function() {
-		       console.log('Finished!');
+		       //console.log('Finished!');
 		     }
 
 		   });
@@ -156,7 +161,7 @@ fishingGame.MainMenu.prototype = {
 		  loop: false,
 		  volume: game.state.states['VStore'].soundVolume,
 		  onend: function() {
-		    console.log('Finished!');
+		   // console.log('Finished!');
 		  }
 		});
 	}
@@ -185,25 +190,29 @@ fishingGame.MainMenu.prototype = {
 		this.logoLabel.x -= this.logoLabel.width/2;
 		this.logoLabel.y -= this.logoLabel.height/2;
 
+	game.time.events.add(2500,function(){	this.spilLogo = game.add.sprite(400,600,'brand');
+		this.spilLogo.x -= this.spilLogo.width;
+		this.spilLogo.y -= this.spilLogo.height;
+	},this);
 
 
-
+var scale = 0.65;
 		//this.playButton = game.add.button(200,300,'play');
 		for(var i = 0; i< 2; i++)
 		{
 
 			if(i == 0)
 			{
-				this.playButtons[i] = game.add.button(200, 270, 'play', function(){game.state.states['Game']._gameMode = 0;game.state.states['VStore'].currentLevel = 0;
+				this.playButtons[i] = game.add.button(200, 240, 'play', function(){game.state.states['Game']._gameMode = 0;game.state.states['VStore'].currentLevel = 0;
 				//soundManager.music.stop();
 				game.state.start('tutorial');}, this, 1, 0, 0);
-				this.playButtons[i].scale.setTo(0.8,0.8);
+				this.playButtons[i].scale.setTo(scale,scale);
 				this.playButtons[i].x -= this.playButtons[i].width/2;
 				this.playButtons[i].y -= this.playButtons[i].height/2;
 
 				this.labels[i] = game.add.text(this.playButtons[i].x+this.playButtons[i].width/2,this.playButtons[i].y+this.playButtons[i].height/2,
-				'JUST PLAY',{ font: '25px Frijole', fill: '#FFF', align: 'center' });
-
+				'JUST PLAY',{ font: '21px Frijole', fill: '#FFF', align: 'center' });
+				//this.labels[i].scale.setTo(scale,scale);
 				this.labels[i].x -= this.labels[i].width/2;
 				this.labels[i].y -= this.labels[i].height/2;
 			}
@@ -213,16 +222,23 @@ fishingGame.MainMenu.prototype = {
 					game.state.states['VStore'].currentLevel = 0;
 					/*soundManager.music.stop();*/
 					 game.state.start('tutorial');}, this, 1, 0, 0);
-				this.playButtons[i].scale.setTo(0.8,0.8);
+				this.playButtons[i].scale.setTo(scale,scale);
 				this.playButtons[i].x = this.playButtons[i-1].x;
 				this.playButtons[i].y = this.playButtons[i-1].y + this.playButtons[i-1].height + 24;
 
 				this.labels[i] = game.add.text(this.playButtons[i].x+this.playButtons[i].width/2,this.playButtons[i].y+this.playButtons[i].height/2,
-				'CHALLENGE',{ font: '23px Frijole', fill: '#FFF', align: 'center' });
+				'CHALLENGE',{ font: '20px Frijole', fill: '#FFF', align: 'center' });
 				this.labels[i].x -= this.labels[i].width/2;
 				this.labels[i].y -= this.labels[i].height/2;
 			}
 		}
+
+		this.moreGames = game.add.button(this.playButtons[1].x, this.playButtons[1].y+this.playButtons[1].height+24, 'play', game.state.states['VStore'].moreGamesHREF,this, 1, 0, 0);
+		this.moreGames.scale.setTo(scale,scale);
+		this.moreLabel =  game.add.text(this.moreGames.x+this.moreGames.width/2,this.moreGames.y+this.moreGames.height/2,
+		'MORE GAMES',{ font: '16px Frijole', fill: '#FFF', align: 'center' });
+		this.moreLabel.x -= this.moreLabel.width/2;
+		this.moreLabel.y -= this.moreLabel.height/2;
 
 		//this.playButton.events.onInputDown.add(function(){game.state.start('Game');});
 
@@ -234,6 +250,7 @@ fishingGame.MainMenu.prototype = {
 		soundManager.muteSound.onInputDown.add(function(){
 				if(game.state.states['VStore'].muteCanClick)
 				{
+					game.state.states['VStore'].moreGamesHREF();
 					game.state.states['VStore'].muteCanClick = false;
 					game.time.events.add(1000, function(){game.state.states['VStore'].muteCanClick = true;
 								}, this);
@@ -287,8 +304,8 @@ fishingGame.MainMenu.prototype = {
 			if(game.state.states['VStore'].hsound.state() == 'loaded' && !game.state.states['VStore'].loadOnce)
 	    {
 	      game.state.states['VStore'].loadOnce = true;
-	      console.log(game.state.states['VStore'].hsound.state());
-					game.state.states['VStore'].hsound.play(); 
+	      //console.log(game.state.states['VStore'].hsound.state());
+				//	game.state.states['VStore'].hsound.play();
 	    }
 
 		this.decorationFishes.update();

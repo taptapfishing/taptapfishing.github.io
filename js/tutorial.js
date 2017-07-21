@@ -4,7 +4,7 @@ fishingGame.tutorial = function (game) {
 	skipLabel = null;
 	background = null;
 
-  tips = ['Tap on the fishing rod\nto change active bait.','Be fast to catch as much\ngold and green fishes\nas you can.','Catch: \n\n\n\ngreen (+5,+10,+15) points\ngold (+100 points)\n\nAvoid: \n\n\n\nblue (-5) points\npink (-150 and broken rod)','Get best scores, get more\nfishing rods!\nBe on the top\nof leaderboard!','Enter your nick:\nleft-right to change\ncurrent nick letter\nup-down to change letter\n\n','NORMAL MODE\nJust catch fishes and score\nat least minimal level score.'];
+  tips = ['Tap on the fishing rod\nto change active bait.','Be fast to catch as much\ngold and green fishes\nas you can.','Catch: \n\n\n\ngreen (+5,+10,+15) points\ngold (+100 points)\n\nAvoid: \n\n\n\nblue (-5) points\npink (-150 and broken\nfishing rod)','Get best scores, get more\nfishing rods!\nBe on the top\nof leaderboard!','Enter your nick:\nleft-right to change\ncurrent nick letter\nup-down to change letter\n\n','NORMAL MODE\nJust catch fishes and score\nat least minimal level score.'];
 
   tipsManager = {
     currentTip : -1,
@@ -55,6 +55,7 @@ fishingGame.tutorial = function (game) {
 				this.nickName = replaceAt(this.nickName,this.currentPos,this.letters[this.currentLetter]);
 
 			this.nickRender.text = this.nickName;
+			this.nickRender.x = 200 - this.nickRender.width/2;
 
 		},
 		changePosition : function(to_prev)
@@ -164,7 +165,7 @@ fishingGame.tutorial = function (game) {
           }
 					else if(this.currentTip == 4)
 					{
-						game.time.events.add(1000, function(){
+						game.time.events.add(200, function(){
 							this.changePosition(false);
 							for(var i = 0; i< 4; i++)
 							{
@@ -193,6 +194,14 @@ fishingGame.tutorial = function (game) {
 fishingGame.tutorial.prototype = {
 
 	create: function () {
+if(tipsManager.currentTip >= 5 && game.state.states['Game']._gameMode == 1)
+{
+	tipsManager.currentTip = -1;
+	/*for(var i = 0; i<2; i++)
+	{
+		tipsManager.screen_3[i].visible = false;
+	}*/
+}
 
 background = game.add.sprite(0,0,'titlepage');
 
@@ -232,7 +241,7 @@ tipsManager.nickButtons[0].x = tipsManager.nickButtons[3].x + (tipsManager.nickB
 tipsManager.nickButtons[0].y = tipsManager.nickButtons[3].y;
 
 
-tipsManager.nextTip();
+
 
 
 
@@ -247,7 +256,13 @@ skipLabel.scale.setTo(0.5,0.5);
 skipLabel.x -= skipLabel.width/2;
 skipLabel.y -= skipLabel.height/2;
 
-game.state.states['VStore'].soundVolume = 0;
+
+
+tipsManager.nextTip();
+skipLabel.visible = false;
+skipButton.visible = false;
+game.time.events.add(3000,function(){skipButton.visible=true;skipLabel.visible=true;},this);
+//game.state.states['VStore'].soundVolume = 0;
 
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button

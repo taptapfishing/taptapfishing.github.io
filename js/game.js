@@ -430,7 +430,7 @@ levelManager = {
       this.rodsAmount = 3;
       this.currentCooldown = 2;
       this.timeForLevel = 180;
-      this.requiredPoints = 1200;
+      this.requiredPoints = 1400;
     }
   if(game.state.states['Game']._gameMode == 0)
     {

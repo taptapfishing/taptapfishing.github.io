@@ -11,6 +11,12 @@
 			width: 100%;
 
 	}
+	.spilgames-branding-image{
+			 display: block;
+			 left: 50px;
+			 top: 100px;
+			 position: absolute;
+	 }
 	#container {
 			/*margin: 0 auto;*/
 			margin-left: 0;
@@ -45,6 +51,10 @@
 	<title>Tap-Tap Fishing</title>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.gameplayer.io/api/js/game.js"></script>
+	    <script type="text/javascript" src="https://cdn.gameplayer.io/api/js/developer.js"></script>
+
 	<script type="text/javascript" src="js/App42-all-3.0.min.js"></script>
 
 	<script src="js/phaser.min.js"></script>
@@ -61,10 +71,21 @@
 </head>
 <body>
 
+
+
+
+
 <div id="container"></div>
 <!-- <script src='js/fullscreen.js'></script> -->
 <script type="text/javascript">
 //syf
+var logoSrc = 0;
+var SpilData = {
+		id: '576742227280291016' // Replace with the value you receive from Spil Games
+};
+
+
+
 App42.initialize("0cc1db50b457b286d1bded348970890dbe0e8148c4b81d318a73a03b5293b35e","77a5adac8ab0220dbe884a32bcd33689fc5eba83b5c1331a25fe90d76ff2753c");
 function replaceAt(str,index,newLetter) {
 
@@ -124,7 +145,46 @@ window.onload = function() {
 	game.state.add('tutorial', fishingGame.tutorial);
 	game.state.add('VStore', fishingGame.variableStore);
 	game.state.add('Game', fishingGame.Game);
+
+
+	GameAPI.loadAPI (function (apiInstance) {
+				 // The API is ready for use.
+				 if (window.console && window.console.log) {
+						 console.log('GameAPI version ' + apiInstance.version + ' loaded!');
+				 }
+				 var logoData = apiInstance.Branding.getLogo();
+
+	        // Shows the logo only when it is configured; otherwise, ignore it.
+	        if (logoData.image) {
+	            // Creates an element and shows the image
+	            var logo = document.createElement('img');
+
+	            logo.src = logoData.image;
+							logoSrc = logo.src;
+							game.state.states['VStore'].logoLink = logoSrc;
+							//console.log(game.state.states['VStore'].logoLink);
+
+	            if (logo.addEventListener) {
+	                logo.addEventListener('click', logoData.action);
+	                logo.addEventListener('touchend', logoData.action);
+	            } else if (logo.attachEvent) {
+	                logo.attachEvent('click', logoData.action);
+	                logo.attachEvent('touchend', logoData.action);
+	            }
+	            logo.className += " spilgames-branding-image";
+	            //document.body.appendChild(logo);
+
+	        }
+					// Other functions you can use of the Spil Game API have been removed in this code example
+
+					// adds a more games button to the screen
+					var buttonProperties = apiInstance.Branding.getLink('more_games');
+					game.state.states['VStore'].moreGamesHREF = buttonProperties.action;
+		 }, SpilData);
+
 	//	Now start the Boot state.
+
+
 	game.state.start('Boot');
 
 	game.scale.pageAlignHorizontally = true;
@@ -134,14 +194,21 @@ window.onload = function() {
 window.addEventListener('resize', function(event){    resizeGame();});var resizeGame = function () {    game.scale.setShowAll();    game.scale.refresh();}
 
 $(window).focus(function() {
-   
-	 if(game.state.states['VStore'].loadOnce) game.state.states['VStore'].hsound.mute(false);
+
+	 if(game.state.states['VStore'].loadOnce)
+	 {
+		 if(!game.state.states['VStore'].is_Muted) game.state.states['VStore'].hsound.mute(false);
+	 }
 });
 
 $(window).blur(function() {
-	if(game.state.states['VStore'].loadOnce)game.state.states['VStore'].hsound.mute(true);
+	if(game.state.states['VStore'].loadOnce)
+	{
+		 if(!game.state.states['VStore'].is_Muted) game.state.states['VStore'].hsound.mute(true);
+	}
 
 });
+
 </script>
 
 </body>

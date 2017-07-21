@@ -25,7 +25,9 @@ fishingGame.Preloader.prototype = {
 		//	as the files below are loaded in.
 		this.load.setPreloadSprite(this.preloadBar);
 
+
 		this.load.image('logo','assets/gui/logoA.png');
+
 
     this.load.spritesheet('fishG','assets/fishG.png',60,45);
     this.load.spritesheet('fishB','assets/fishB.png',60,45);
@@ -55,8 +57,9 @@ fishingGame.Preloader.prototype = {
 
 
     this.load.spritesheet('titlepage', 'assets/menuLoadBG.png',400,600);
-    this.load.audio('titleMusic', ['assets/sfx/loop.ogg']);
+    this.load.audio('titleMusic', ['assets/sfx/loop1.ogg']);
 		this.load.audio('pop', ['assets/sfx/pop.ogg']);
+		
 
 		//	Here we load the rest of the assets our game needs.
 		//	As this is just a Project Template I've not provided these assets, swap them for your own.

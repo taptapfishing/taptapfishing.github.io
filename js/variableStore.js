@@ -16,7 +16,9 @@ fishingGame.variableStore = function (game) {
   pop = 0;
   hpop = 0;
   hsound =0;
-
+  overallRank = 0;
+  logoLink = 0;
+  moreGamesHREF = 0;
 }
 fishingGame.variableStore.prototype = {
 

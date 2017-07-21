@@ -1,6 +1,8 @@
 fishingGame.levelSummary = function (game) {
   continueButton = null;
   continueLabel = null;
+  menuButton = null;
+  menuLabel = null;
   background = null;
   currentLevel = 0;
   failed = false;
@@ -28,7 +30,7 @@ fishingGame.levelSummary = function (game) {
       {
         apiLevelName += '3';
       }
-  		console.log(apiLevelName);
+  		//console.log(apiLevelName);
 
       var scoreBoardService = new App42ScoreBoard();
       this.textResult = '';
@@ -47,6 +49,7 @@ fishingGame.levelSummary = function (game) {
                 //console.log(userName);
               }
               var result;
+               GameAPI.Score.submit(n);
               scoreBoardService.saveUserScore(gameName, userName, n, {
                   success: function (object) {
                     //  $(".success").show();
@@ -61,7 +64,7 @@ fishingGame.levelSummary = function (game) {
               });
 
               game.time.events.add(1500,function(){
-                scoreBoardService.getTopNRankers(apiLevelName, 3,{
+                scoreBoardService.getTopNRankers(apiLevelName, 8,{
                   success: function(object)
                   {
                    var scorelist = "";
@@ -92,7 +95,7 @@ fishingGame.levelSummary = function (game) {
                               }
 
                               congratsLabel.text = congratsTxt;
-                              console.log(congratsTxt.length);
+                            //  console.log(congratsTxt.length);
                               if(game.state.states['VStore'].levelScore >= game.state.states['VStore'].bestLevelScore)
                               {
                                 congratsLabel.addColor('#0f0',congratsTxt.length - 31);
@@ -124,13 +127,17 @@ fishingGame.levelSummary = function (game) {
           if(game.state.states['VStore'].currentLevel < 8)
           {
             game.state.states['VStore'].currentLevel += 4;
+            game.state.states['VStore'].overallRank += game.state.states['VStore'].levelScore;
+            //console.log(game.state.states['VStore'].overallRank);
             game.state.start('Break');
           }
-          else {
-            game.state.states['VStore'].music.stop();
-            game.state.start('MainMenu');
-            //do testów!
-          }
+          //console.log(game.state.states['VStore'].currentLevel);
+        }
+        else {
+          game.state.states['VStore'].overallRank += game.state.states['VStore'].levelScore;
+          console.log(game.state.states['VStore'].overallRank);
+                game.state.start('fixMusic');
+          //do testów!
         }
 
       }
@@ -162,7 +169,7 @@ fishingGame.levelSummary.prototype = {
           if(!t_failed)
           {
             congratsTxt = 'Congratulations!\n'+game.state.states['VStore'].userName + ' scored: '+game.state.states['VStore'].levelScore;
-              congratsTxt += '\nTop scores:\n';//+game.state.states['VStore'].topRank;
+              congratsTxt += '\nTop scores:\n(this may take awhile)\n\n';//+game.state.states['VStore'].topRank;
             //congratsTxt += game.state.states['VStore'].topRank;
 
             //console.log(scoreBoard.textResult);
@@ -171,8 +178,8 @@ fishingGame.levelSummary.prototype = {
           }
           else
           {
-            congratsTxt = 'Ups!\nTry again!\nScored: '+game.state.states['VStore'].levelScore;
-            congratsTxt += '\nTop scores:\n';//+game.state.states['VStore'].topRank;
+            congratsTxt = 'Ups!\nTry again!\n'+game.state.states['VStore'].userName +'Scored: '+game.state.states['VStore'].levelScore;
+            congratsTxt += '\nTop scores:\n(this may take awhile)\n\n';//+game.state.states['VStore'].topRank;
             bLabel = 'RESTART';
           }
 
@@ -181,22 +188,35 @@ fishingGame.levelSummary.prototype = {
     background = game.add.sprite(0,0,'titlepage');
     //continueButton = game.add.button(200,300,'play');
 
-    congratsLabel = game.add.text(200, 32,congratsTxt,{ font: '20px Frijole', fill: '#FFF', wordWrapWidth: 200, align: 'center' });
+    congratsLabel = game.add.text(200, 32,congratsTxt,{ font: '18px Frijole', fill: '#FFF', wordWrapWidth: 200, align: 'center' });
     congratsLabel.x -= congratsLabel.width/2;
     congratsLabel.stroke = '#000000';
     congratsLabel.strokeThickness = 6;
     congratsLabel.fill = '#fff';
+
+
     //congratsLabel.setShadow(congratsLabel.x-4,congratsLabel.y-4,'#000',5,true,true);
 
 
-      continueButton = game.add.button(200, 400, 'play',function(){actionManager.next(t_failed);}, this, 1, 0, 0);
+      continueButton = game.add.button(400, 600, 'play',function(){actionManager.next(t_failed);}, this, 1, 0, 0);
 
-      continueButton.x -= continueButton.width/2;
-      continueButton.y -= continueButton.height/2;
+      continueButton.scale.setTo(0.5,0.5);
+      continueButton.x -= continueButton.width;
+      //continueButton.y -= continueButton.height/2;
+      continueButton.y -= continueButton.height;
 
-      continueLabel = game.add.text(continueButton.x + continueButton.width/2, continueButton.y+continueButton.height/2,bLabel,{ font: '28px Frijole', fill: '#FFF', align: 'center' });
+      continueLabel = game.add.text(continueButton.x + continueButton.width/2, continueButton.y+continueButton.height/2,bLabel,{ font: '17px Frijole', fill: '#FFF', align: 'center' });
+      //continueLabel.scale.setTo(0.5,0.5);
       continueLabel.x -= continueLabel.width/2;
       continueLabel.y -= continueLabel.height/2;
+
+      menuButton = game.add.button(0, continueButton.y , 'play',function(){game.state.start('MainMenu');}, this, 1, 0, 0);
+      menuButton.scale.setTo(0.5,0.5);
+      //menuButton.x -= menuButton.width;
+
+      menuLabel = game.add.text(menuButton.x + menuButton.width/2, menuButton.y+menuButton.height/2,'Menu',{ font: '28px Frijole', fill: '#FFF', align: 'center' });
+      menuLabel.x -= menuLabel.width/2;
+      menuLabel.y -= menuLabel.height/2;
 
 
   /*  continueButton.x -= continueButton.width/2;

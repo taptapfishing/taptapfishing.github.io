@@ -74,9 +74,7 @@ fishingGame.Boot.prototype = {
               this.game.canvas.id = 'canvas';
         }
 
-        if (this.game.device.android && this.game.device.chrome && this.game.device.chromeVersion >= 55) {
 
-}
 
     },
 
