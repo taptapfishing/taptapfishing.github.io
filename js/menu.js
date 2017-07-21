@@ -249,8 +249,7 @@ var scale = 0.65;
 		soundManager.muteSound.frame = game.state.states['VStore'].muteFrame;
 		soundManager.muteSound.onInputDown.add(function(){
 				if(game.state.states['VStore'].muteCanClick)
-				{
-					game.state.states['VStore'].moreGamesHREF();
+				{					
 					game.state.states['VStore'].muteCanClick = false;
 					game.time.events.add(1000, function(){game.state.states['VStore'].muteCanClick = true;
 								}, this);
