@@ -19,6 +19,7 @@ fishingGame.variableStore = function (game) {
   overallRank = 0;
   logoLink = 0;
   moreGamesHREF = 0;
+  logoSpilHREF = 0;
 }
 fishingGame.variableStore.prototype = {
 

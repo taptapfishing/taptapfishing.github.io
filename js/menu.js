@@ -190,7 +190,8 @@ if(!game.state.states['VStore'].loadOnce)
 		this.logoLabel.x -= this.logoLabel.width/2;
 		this.logoLabel.y -= this.logoLabel.height/2;
 
-	game.time.events.add(2500,function(){	this.spilLogo = game.add.sprite(400,600,'brand');
+	game.time.events.add(2500,function(){	this.spilLogo = game.add.button(400,600,'brand',game.state.states['VStore'].logoSpilHREF);
+	//this.spilLogo.onInputDown.add(game.state.states['VStore'].logoSpilHREF,this);
 		this.spilLogo.x -= this.spilLogo.width;
 		this.spilLogo.y -= this.spilLogo.height;
 	},this);
@@ -249,7 +250,7 @@ var scale = 0.65;
 		soundManager.muteSound.frame = game.state.states['VStore'].muteFrame;
 		soundManager.muteSound.onInputDown.add(function(){
 				if(game.state.states['VStore'].muteCanClick)
-				{					
+				{
 					game.state.states['VStore'].muteCanClick = false;
 					game.time.events.add(1000, function(){game.state.states['VStore'].muteCanClick = true;
 								}, this);
