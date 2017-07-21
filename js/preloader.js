@@ -57,9 +57,9 @@ fishingGame.Preloader.prototype = {
 
 
     this.load.spritesheet('titlepage', 'assets/menuLoadBG.png',400,600);
-    this.load.audio('titleMusic', ['assets/sfx/loop1.ogg']);
-		this.load.audio('pop', ['assets/sfx/pop.ogg']);
-		
+    this.load.audio('titleMusic', ['assets/sfx/loop1.ogg','assets/sfx/loop1.aac','assets/sfx/loop1.mp3']);
+		this.load.audio('pop', ['assets/sfx/pop.ogg','assets/sfx/pop.mp3']);
+
 
 		//	Here we load the rest of the assets our game needs.
 		//	As this is just a Project Template I've not provided these assets, swap them for your own.
@@ -90,7 +90,7 @@ fishingGame.Preloader.prototype = {
 		//	If you don't have any music in your game then put the game.state.start line into the create function and delete
 		//	the update function completely.
 
-		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
+		if (this.ready == false)
 		{
 			this.ready = true;
 			this.state.start('MainMenu');
