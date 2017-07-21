@@ -96,10 +96,10 @@ fishingGame.levelSummary = function (game) {
 
                               congratsLabel.text = congratsTxt;
                             //  console.log(congratsTxt.length);
-                              if(game.state.states['VStore'].levelScore >= game.state.states['VStore'].bestLevelScore)
+                            /*  if(game.state.states['VStore'].levelScore >= game.state.states['VStore'].bestLevelScore)
                               {
                                 congratsLabel.addColor('#0f0',congratsTxt.length - 31);
-                              }
+                              }*/
                               congratsLabel.x = 200 - congratsLabel.width/2;
 
                           }
