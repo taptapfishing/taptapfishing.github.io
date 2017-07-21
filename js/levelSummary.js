@@ -178,7 +178,7 @@ fishingGame.levelSummary.prototype = {
           }
           else
           {
-            congratsTxt = 'Ups!\nTry again!\n'+game.state.states['VStore'].userName +'Scored: '+game.state.states['VStore'].levelScore;
+            congratsTxt = 'Ups!\nTry again!\n'+game.state.states['VStore'].userName +' scored: '+game.state.states['VStore'].levelScore;
             congratsTxt += '\nTop scores:\n(this may take awhile)\n\n';//+game.state.states['VStore'].topRank;
             bLabel = 'RESTART';
           }
