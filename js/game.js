@@ -413,8 +413,8 @@ levelManager = {
     {
       this.rodsAmount = 1;
       this.currentCooldown = 0;
-      this.timeForLevel = 12;
-      this.requiredPoints = 5;
+      this.timeForLevel = 120;
+      this.requiredPoints = 500;
       /*this.timeForLevel = 120;
       this.requiredPoints = 0;*/
     }
@@ -422,15 +422,15 @@ levelManager = {
     {
       this.rodsAmount = 2;
       this.currentCooldown = 1;
-      this.timeForLevel = 15;
-      this.requiredPoints = 8;
+      this.timeForLevel = 150;
+      this.requiredPoints = 800;
     }
     else if(this.currentLevel == 2)
     {
       this.rodsAmount = 3;
       this.currentCooldown = 2;
-      this.timeForLevel = 18;
-      this.requiredPoints = 1;
+      this.timeForLevel = 180;
+      this.requiredPoints = 1400;
     }
   if(game.state.states['Game']._gameMode == 0)
     {
