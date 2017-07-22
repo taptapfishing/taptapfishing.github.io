@@ -26,7 +26,7 @@ fishingGame.levelSummary = function (game) {
       {
         apiLevelName += '2';
       }
-      else if(game.state.states['VStore'].currentLevel > 6 && game.state.states['VStore'].currentLevel<= 9)
+      else if(game.state.states['VStore'].currentLevel > 6 && game.state.states['VStore'].currentLevel<= 12)
       {
         apiLevelName += '3';
       }
@@ -89,10 +89,10 @@ fishingGame.levelSummary = function (game) {
                               //console.log(game.state.states['VStore'].topRank);
                               congratsTxt += game.state.states['VStore'].topRank;
                               game.state.states['VStore'].bestLevelScore = scoreList[0].value;
-                              if(game.state.states['VStore'].levelScore >= game.state.states['VStore'].bestLevelScore)
+                            /*  if(game.state.states['VStore'].levelScore >= game.state.states['VStore'].bestLevelScore)
                               {
                                 congratsTxt += '\nYOU BEAT BEST SCORE!!!11';
-                              }
+                              }*/
 
                               congratsLabel.text = congratsTxt;
                             //  console.log(congratsTxt.length);
@@ -122,20 +122,20 @@ fishingGame.levelSummary = function (game) {
     {
       if(is_failed == false)
       {
-        if(game.state.states['VStore'].currentLevel < 8)
+        if(game.state.states['VStore'].currentLevel < 2)
         {
-          if(game.state.states['VStore'].currentLevel < 8)
+          if(game.state.states['VStore'].currentLevel < 2)
           {
-            game.state.states['VStore'].currentLevel += 4;
+            game.state.states['VStore'].currentLevel += 1;
             game.state.states['VStore'].overallRank += game.state.states['VStore'].levelScore;
             //console.log(game.state.states['VStore'].overallRank);
             game.state.start('Break');
           }
           //console.log(game.state.states['VStore'].currentLevel);
         }
-        else {
+        else if(game.state.states['VStore'].currentLevel == 2) {
           game.state.states['VStore'].overallRank += game.state.states['VStore'].levelScore;
-          console.log(game.state.states['VStore'].overallRank);
+      //  console.log(game.state.states['VStore'].overallRank);
                 game.state.start('fixMusic');
           //do testów!
         }
@@ -178,7 +178,7 @@ fishingGame.levelSummary.prototype = {
           }
           else
           {
-            congratsTxt = 'Ups!\nTry again!\n'+game.state.states['VStore'].userName +' scored: '+game.state.states['VStore'].levelScore;
+            congratsTxt = 'Ups! Try again!\n'+game.state.states['VStore'].userName +' scored: '+game.state.states['VStore'].levelScore;
             congratsTxt += '\nTop scores:\n(this may take awhile)\n\n';//+game.state.states['VStore'].topRank;
             bLabel = 'RESTART';
           }

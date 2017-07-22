@@ -46,7 +46,7 @@ fishingGame.fixMusic.prototype = {
 		playButton.visible = false;
 		label.visible = false;
 
-		text = game.add.text(200,32,'Play again and\nboost your score!\n',{ font: '28px Frijole', fill: '#FFF', align: 'center' });
+		text = game.add.text(200,16,'Play again and\nboost your score!\n',{ font: '28px Frijole', fill: '#FFF', align: 'center' });
 		text.x -= text.width/2;
 
 		topRankedTxt = 'Top players overall:\n\n';
@@ -112,11 +112,11 @@ fishingGame.fixMusic.prototype = {
 
 		//	Do some nice funky main menu effect here
     //console.log(game.state.states['VStore'].hsound.state());
-    if(game.state.states['VStore'].hsound.state() == 'loaded' && !game.state.states['VStore'].loadOnce)
+    /*if(game.state.states['VStore'].hsound.state() == 'loaded' && !game.state.states['VStore'].loadOnce)
     {
       game.state.states['VStore'].loadOnce = true;
       console.log(game.state.states['VStore'].hsound.state());
-    }
+    }*/
 
 	},
 

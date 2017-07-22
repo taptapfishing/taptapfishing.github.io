@@ -409,28 +409,28 @@ levelManager = {
     this.remainingFishes = this.fishAmount;
     this.requiredPoints = this.requiredPointsStart;
 
-    if(this.currentLevel <= 3)
+    if(this.currentLevel == 0)
     {
       this.rodsAmount = 1;
       this.currentCooldown = 0;
-      this.timeForLevel = 120;
-      this.requiredPoints = 500;
+      this.timeForLevel = 12;
+      this.requiredPoints = 5;
       /*this.timeForLevel = 120;
       this.requiredPoints = 0;*/
     }
-    else if(this.currentLevel <= 6 && this.currentLevel > 3)
+    else if(this.currentLevel ==1)
     {
       this.rodsAmount = 2;
       this.currentCooldown = 1;
-      this.timeForLevel = 150;
-      this.requiredPoints = 800;
+      this.timeForLevel = 15;
+      this.requiredPoints = 8;
     }
-    else if(this.currentLevel <= 9 && this.currentLevel > 6)
+    else if(this.currentLevel == 2)
     {
       this.rodsAmount = 3;
       this.currentCooldown = 2;
-      this.timeForLevel = 180;
-      this.requiredPoints = 1400;
+      this.timeForLevel = 18;
+      this.requiredPoints = 1;
     }
   if(game.state.states['Game']._gameMode == 0)
     {
@@ -448,7 +448,7 @@ levelManager = {
     this.levelElapsed = 0;
     //this.timeCounter.removeAll();
     //this.timeCounter.stop(false);
-    if(this.currentLevel < 9)this.currentLevel++;
+    //if(this.currentLevel < 9)this.currentLevel++;
     this.prepareLevel();
     gameInfo.addPoints(-gameInfo.pointsValue);
     spawners.tidyUp();

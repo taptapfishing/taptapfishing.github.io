@@ -4,6 +4,9 @@ fishingGame.tutorial = function (game) {
 	skipLabel = null;
 	background = null;
 
+	skipTutorial = null;
+	skipTutorialLabel = null;
+
   tips = ['Tap on the fishing rod\nto change active bait.','Be fast to catch as much\ngold and green fishes\nas you can.','Catch: \n\n\n\ngreen (+5,+10,+15) points\ngold (+100 points)\n\nAvoid: \n\n\n\nblue (-5) points\npink (-150 and broken\nfishing rod)','Get best scores, get more\nfishing rods!\nBe on the top\nof leaderboard!','Enter your nick:\nleft-right to change\ncurrent nick letter\nup-down to change letter\n\n','NORMAL MODE\nJust catch fishes and score\nat least minimal level score.'];
 
   tipsManager = {
@@ -107,12 +110,23 @@ fishingGame.tutorial = function (game) {
         if(this.currentTip < tips.length-1)
         {
           this.currentTip += 1;
+					if(this.currentTip>=1 )
+					{
+						skipTutorial.visible=false;skipTutorialLabel.visible=false;
+					}
 
 
           this.tipRenderTxt.text = tips[this.currentTip];
           this.tipRenderTxt.x = 200 - this.tipRenderTxt.width/2;
           this.locked = true;
-          game.time.events.add(this.lockedCooldown, function(){this.locked = false;  skipButton.visible=true;skipLabel.visible=true;  }, this);
+          game.time.events.add(this.lockedCooldown, function(){
+						this.locked = false;  skipButton.visible=true;skipLabel.visible=true;
+
+						if(this.currentTip<1 )
+						{
+							skipTutorial.visible=true;skipTutorialLabel.visible=true;
+						}
+					}, this);
 					if(this.currentTip == 5)
 					{
 						for(var i = 0; i< 4; i++)
@@ -244,24 +258,38 @@ tipsManager.nickButtons[0].y = tipsManager.nickButtons[3].y;
 
 
 
-
-skipButton = game.add.button(320, 540, 'play',function(){tipsManager.nextTip();skipButton.visible=false;skipLabel.visible=false;}, this, 1, 0, 0);
+skipButton = game.add.button(400, 600, 'play',function(){tipsManager.nextTip();skipButton.visible=false;skipLabel.visible=false;}, this, 1, 0, 0);
 skipButton.scale.setTo(0.5,0.5);
 
-skipButton.x -= skipButton.width/2;
-skipButton.y -= skipButton.height/2;
+skipButton.x -= skipButton.width;
+skipButton.y -= skipButton.height;
 
 skipLabel = game.add.text(skipButton.x + skipButton.width/2, skipButton.y+skipButton.height/2,'Next',{ font: '28px Frijole', fill: '#FFF', align: 'center' });
 skipLabel.scale.setTo(0.5,0.5);
 skipLabel.x -= skipLabel.width/2;
 skipLabel.y -= skipLabel.height/2;
 
+skipTutorial = game.add.button(0, 600, 'play',function(){tipsManager.currentTip = 3;tipsManager.nextTip();skipButton.visible=false;skipLabel.visible=false; skipTutorial.visible =false;skipTutorialLabel.visible =false;}, this, 1, 0, 0);
+skipTutorial.scale.setTo(0.5,0.5);
+//skipTutorial.x -= skipButton.width/2;
+skipTutorial.y -= skipTutorial.height;
+skipTutorialLabel = game.add.text(skipTutorial.x + skipTutorial.width/2, skipTutorial.y+skipTutorial.height/2,'Skip',{ font: '28px Frijole', fill: '#FFF', align: 'center' });
+skipTutorialLabel.scale.setTo(0.5,0.5);
+skipTutorialLabel.x -= skipTutorialLabel.width/2;
+skipTutorialLabel.y -= skipTutorialLabel.height/2;
+
 
 
 tipsManager.nextTip();
 skipLabel.visible = false;
 skipButton.visible = false;
-game.time.events.add(3000,function(){skipButton.visible=true;skipLabel.visible=true;},this);
+skipTutorial.visible = false;
+skipTutorialLabel.visible = false;
+
+
+game.time.events.add(3000,function(){skipButton.visible=true;skipLabel.visible=true;
+	skipTutorial.visible=true;skipTutorialLabel.visible=true;
+},this);
 //game.state.states['VStore'].soundVolume = 0;
 
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.

@@ -136,18 +136,24 @@ fishingGame.MainMenu.prototype = {
 
 		create: function () {
 
-			if(!game.state.states['VStore'].loadOnce)
+			/*if(!game.state.states['VStore'].loadOnce)
 							{
 						game.time.events.add(2000,function(){
 							game.load.image('brand',game.state.states['VStore'].logoLink);
 							game.load.start();
 							//console.log(game.state.states['VStore'].logoLink);
 						},this);
-						game.state.states['VStore'].loadOnce = true;
-					}
+						//game.state.states['VStore'].loadOnce = true;
+					}*/
+					game.time.events.add(2000,function(){
+						game.load.image('brand',game.state.states['VStore'].logoLink);
+						game.load.start();
+						//console.log(game.state.states['VStore'].logoLink);
+					},this);
 
 		//tubyło
 		game.state.states['VStore'].is_Muted = false;
+		game.state.states['VStore'].overallRank = 0;
 
 		//soundManager.music = this.add.audio('titleMusic');
 
