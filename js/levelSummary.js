@@ -19,15 +19,15 @@ fishingGame.levelSummary = function (game) {
     saveScore : function(n)
     {
       var apiLevelName = 'taptapfishing';
-      if(game.state.states['VStore'].currentLevel<= 3)
+      if(game.state.states['VStore'].currentLevel== 0)
       {
         apiLevelName += '1';
       }
-      else if(game.state.states['VStore'].currentLevel > 3 && game.state.states['VStore'].currentLevel<= 6)
+      else if(game.state.states['VStore'].currentLevel == 1 )
       {
         apiLevelName += '2';
       }
-      else if(game.state.states['VStore'].currentLevel > 6 && game.state.states['VStore'].currentLevel<= 12)
+      else if(game.state.states['VStore'].currentLevel ==2)
       {
         apiLevelName += '3';
       }
