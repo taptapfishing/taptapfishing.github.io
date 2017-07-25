@@ -58,7 +58,7 @@ fishingGame.Preloader.prototype = {
 
 
     this.load.spritesheet('titlepage', 'assets/menuLoadBG.png',400,600);
-    this.load.audio('titleMusic', ['assets/sfx/loop1.ogg','assets/sfx/loop1.aac','assets/sfx/loop1.mp3']);
+    this.load.audio('titleMusic', ['assets/sfx/loop3.ogg','assets/sfx/loop3.aac','assets/sfx/loop3.mp3']);
 		this.load.audio('pop', ['assets/sfx/pop.ogg','assets/sfx/pop.mp3']);
 
 		if(!game.state.states['VStore'].loadOnce)
