@@ -6,6 +6,7 @@ fishingGame.levelSummary = function (game) {
   background = null;
   currentLevel = 0;
   failed = false;
+  backScreen = null;
 
   congratsLabel = null;
   congratsTxt = 'Congratulations!\nPrepare yourself for\nnext level!';
@@ -49,7 +50,7 @@ fishingGame.levelSummary = function (game) {
                 //console.log(userName);
               }
               var result;
-               GameAPI.Score.submit(n);
+               //GameAPI.Score.submit(n);
               scoreBoardService.saveUserScore(gameName, userName, n, {
                   success: function (object) {
                     //  $(".success").show();
@@ -187,6 +188,9 @@ fishingGame.levelSummary.prototype = {
 
     background = game.add.sprite(0,0,'titlepage');
     //continueButton = game.add.button(200,300,'play');
+    backScreen = game.add.sprite(200,16,'summary');
+    backScreen.x -= backScreen.width/2;
+  //  backScreen.y -= backScreen.height/2;
 
     congratsLabel = game.add.text(200, 32,congratsTxt,{ font: '18px Frijole', fill: '#FFF', wordWrapWidth: 200, align: 'center' });
     congratsLabel.x -= congratsLabel.width/2;

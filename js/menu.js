@@ -9,7 +9,7 @@ fishingGame.MainMenu = function (game) {
 	this.bgLayers = [null,null];
 	this.logo = null;
 	this.logoLabel = null;
-	this.spilLogo = null;
+	//this.spilLogo = null;
 
 	soundManager = {
 			music : null,
@@ -145,11 +145,11 @@ fishingGame.MainMenu.prototype = {
 						},this);
 						//game.state.states['VStore'].loadOnce = true;
 					}*/
-					game.time.events.add(2000,function(){
+				/*	game.time.events.add(2000,function(){
 						game.load.image('brand',game.state.states['VStore'].logoLink);
 						game.load.start();
 						//console.log(game.state.states['VStore'].logoLink);
-					},this);
+					},this);*/
 
 		//tubyło
 		game.state.states['VStore'].is_Muted = false;
@@ -176,21 +176,21 @@ fishingGame.MainMenu.prototype = {
 		this.logoLabel.x -= this.logoLabel.width/2;
 		this.logoLabel.y -= this.logoLabel.height/2;
 
-	game.time.events.add(2500,function(){	this.spilLogo = game.add.button(400,600,'brand',game.state.states['VStore'].logoSpilHREF);
+	/*game.time.events.add(2500,function(){	this.spilLogo = game.add.button(400,600,'brand',game.state.states['VStore'].logoSpilHREF);
 	//this.spilLogo.onInputDown.add(game.state.states['VStore'].logoSpilHREF,this);
 		this.spilLogo.x -= this.spilLogo.width;
 		this.spilLogo.y -= this.spilLogo.height;
-	},this);
+	},this);*/
 
 
-var scale = 0.65;
+var scale = 1.0;
 		//this.playButton = game.add.button(200,300,'play');
 		for(var i = 0; i< 2; i++)
 		{
 
 			if(i == 0)
 			{
-				this.playButtons[i] = game.add.button(200, 240, 'play', function(){game.state.states['Game']._gameMode = 0;game.state.states['VStore'].currentLevel = 0;
+				this.playButtons[i] = game.add.button(200, 300, 'play', function(){game.state.states['Game']._gameMode = 0;game.state.states['VStore'].currentLevel = 0;
 				//soundManager.music.stop();
 				game.state.start('tutorial');}, this, 1, 0, 0);
 				this.playButtons[i].scale.setTo(scale,scale);
@@ -227,6 +227,8 @@ var scale = 0.65;
 		this.moreLabel.x -= this.moreLabel.width/2;
 		this.moreLabel.y -= this.moreLabel.height/2;
 
+		this.moreLabel.visible = false;
+		this.moreGames.visible = false;
 		//this.playButton.events.onInputDown.add(function(){game.state.start('Game');});
 
 		game.state.states['VStore'].muteCanClick = true;

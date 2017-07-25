@@ -11,21 +11,7 @@ fishingGame.fixMusic.prototype = {
 
 	create: function () {
 
-		var apiLevelName = 'taptapfishing';
-		if(game.state.states['VStore'].currentLevel<= 3)
-		{
-			apiLevelName += '1';
-		}
-		else if(game.state.states['VStore'].currentLevel > 3 && game.state.states['VStore'].currentLevel<= 6)
-		{
-			apiLevelName += '2';
-		}
-		else if(game.state.states['VStore'].currentLevel > 6 && game.state.states['VStore'].currentLevel<= 9)
-		{
-			apiLevelName += '3';
-		}
-
-    background = game.add.sprite(0,0,'titlepage');
+		 background = game.add.sprite(0,0,'titlepage');
 
 
 

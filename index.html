@@ -11,12 +11,7 @@
 			width: 100%;
 
 	}
-	.spilgames-branding-image{
-			 display: block;
-			 left: 50px;
-			 top: 100px;
-			 position: absolute;
-	 }
+
 	#container {
 			/*margin: 0 auto;*/
 			margin-left: 0;
@@ -52,8 +47,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<script type="text/javascript" src="https://cdn.gameplayer.io/api/js/game.js"></script>
-	    <script type="text/javascript" src="https://cdn.gameplayer.io/api/js/developer.js"></script>
+
 
 	<script type="text/javascript" src="js/App42-all-3.0.min.js"></script>
 
@@ -80,9 +74,6 @@
 <script type="text/javascript">
 //syf
 var logoSrc = 0;
-var SpilData = {
-		id: '576742227280291016' // Replace with the value you receive from Spil Games
-};
 
 
 
@@ -147,45 +138,11 @@ window.onload = function() {
 	game.state.add('Game', fishingGame.Game);
 
 
-	GameAPI.loadAPI (function (apiInstance) {
-				 // The API is ready for use.
-				 if (window.console && window.console.log) {
-						 console.log('GameAPI version ' + apiInstance.version + ' loaded!');
-				 }
-				 var logoData = apiInstance.Branding.getLogo();
 
-	        // Shows the logo only when it is configured; otherwise, ignore it.
-	        if (logoData.image) {
-	            // Creates an element and shows the image
-	            var logo = document.createElement('img');
-
-	            logo.src = logoData.image;
-							logoSrc = logo.src;
-							game.state.states['VStore'].logoLink = logoSrc;
-							game.state.states['VStore'].logoSpilHREF = logoData.action;							
-							//console.log(game.state.states['VStore'].logoLink);
-
-	            if (logo.addEventListener) {
-	                logo.addEventListener('click', logoData.action);
-	                logo.addEventListener('touchend', logoData.action);
-	            } else if (logo.attachEvent) {
-	                logo.attachEvent('click', logoData.action);
-	                logo.attachEvent('touchend', logoData.action);
-	            }
-	            logo.className += " spilgames-branding-image";
-	            //document.body.appendChild(logo);
-
-	        }
-					// Other functions you can use of the Spil Game API have been removed in this code example
-
-					// adds a more games button to the screen
-					var buttonProperties = apiInstance.Branding.getLink('more_games');
-					game.state.states['VStore'].moreGamesHREF = buttonProperties.action;
-		 }, SpilData);
 
 	//	Now start the Boot state.
 
-
+	game.state.states['VStore'].loadOnce = false;
 	game.state.start('Boot');
 
 	game.scale.pageAlignHorizontally = true;

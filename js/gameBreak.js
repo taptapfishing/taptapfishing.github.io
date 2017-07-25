@@ -7,7 +7,7 @@ fishingGame.gameBreak = function (game) {
 	breakManager ={
 		beginB : function()
 		{
-			
+
 		},
 		endB : function(data)
 		{
@@ -86,12 +86,12 @@ game.state.states['VStore'].soundVolume = 0;
 	 	game.state.states['VStore'].hsound.fade(1.0,0.0,1000);
  }
 
-//game.time.events.add(3000,function(){game.state.start('Game');},this);
+game.time.events.add(3000,function(){game.state.start('Game');},this);
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
 
-GameAPI.GameBreak.request(breakManager.beginB, breakManager.endB);
+//GameAPI.GameBreak.request(breakManager.beginB, breakManager.endB);
 	},
 
 	update: function () {

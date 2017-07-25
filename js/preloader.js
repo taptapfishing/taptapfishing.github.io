@@ -37,6 +37,7 @@ fishingGame.Preloader.prototype = {
 
 		this.load.spritesheet('splash','assets/splash.png',80,80);
 		this.load.spritesheet('letterB','assets/gui/letterB.png',180,190);
+		this.load.image('summary','assets/gui/summary.png');
 
 		this.load.spritesheet('decoFish','assets/fishBG2.png',109,67);
 		this.load.spritesheet('bubble','assets/bubble.png',32,32);
@@ -62,11 +63,11 @@ fishingGame.Preloader.prototype = {
 
 		if(!game.state.states['VStore'].loadOnce)
 						{
-							
+
 							game.state.states['VStore'].overallRank = 0;
 							//console.log(game.state.states['VStore'].overallRank);
 				      game.state.states['VStore'].hsound=    new Howl({
-				     src: ['assets/sfx/loop1.ogg','assets/sfx/loop1.aac','assets/sfx/loop1.mp3'],
+				     src: ['assets/sfx/loop3.mp3','assets/sfx/loop3.aac','assets/sfx/loop3.ogg'],
 				     autoplay: true,
 				     loop: true,
 				     volume: game.state.states['VStore'].soundVolume,
